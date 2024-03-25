@@ -25,6 +25,7 @@ class MovieListAdapter(
             .inflate(R.layout.item_movie, parent, false)
         return MovieViewHolder(view)
     }
+
     override fun getItemCount(): Int = movies.size
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = movies[position].title;
@@ -33,23 +34,26 @@ class MovieListAdapter(
         val context: Context = holder.movieImage.context
         var id: Int = context.resources
             .getIdentifier(genreMatch, "drawable", context.packageName)
-        if (id==0) id=context.resources
+        if (id == 0) id = context.resources
             .getIdentifier("picture1", "drawable", context.packageName)
         holder.movieImage.setImageResource(id)
     }
+
     fun updateMovies(movies: List<Movie>) {
         this.movies = movies
         notifyDataSetChanged()
     }
+
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
         val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
     }
 }
+
 class MainActivity : AppCompatActivity() {
     private lateinit var favoriteMovies: RecyclerView
     private lateinit var favoriteMoviesAdapter: MovieListAdapter
-    private var favoriteMoviesList =  getFavoriteMovies()
+    private var favoriteMoviesList = getFavoriteMovies()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
