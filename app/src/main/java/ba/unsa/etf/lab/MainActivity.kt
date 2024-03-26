@@ -1,6 +1,7 @@
 package ba.unsa.etf.lab
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,56 +17,56 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieListAdapter(
-    private var movies: List<Movie>
-) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.item_movie, parent, false)
-        return MovieViewHolder(view)
-    }
 
-    override fun getItemCount(): Int = movies.size
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.movieTitle.text = movies[position].title;
-        val genreMatch: String = movies[position].genre
-        //Pronalazimo id drawable elementa na osnovu naziva zanra
-        val context: Context = holder.movieImage.context
-        var id: Int = context.resources
-            .getIdentifier(genreMatch, "drawable", context.packageName)
-        if (id == 0) id = context.resources
-            .getIdentifier("picture1", "drawable", context.packageName)
-        holder.movieImage.setImageResource(id)
-    }
-
-    fun updateMovies(movies: List<Movie>) {
-        this.movies = movies
-        notifyDataSetChanged()
-    }
-
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
-        val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
-    }
-}
 
 class MainActivity : AppCompatActivity() {
     private lateinit var favoriteMovies: RecyclerView
+    private lateinit var searchText: TextView
     private lateinit var favoriteMoviesAdapter: MovieListAdapter
-    private var favoriteMoviesList = getFavoriteMovies()
+    private var favoriteMoviesList =  getFavoriteMovies()
+    private lateinit var recentMovies: RecyclerView
+    private lateinit var recentMoviesAdapter: MovieListAdapter
+    private var recentMoviesList =  getRecentMovies()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         favoriteMovies = findViewById(R.id.favoriteMovies)
+        recentMovies = findViewById(R.id.recentMovies)
+        searchText= findViewById(R.id.searchText)
+
         favoriteMovies.layoutManager = LinearLayoutManager(
             this,
             LinearLayoutManager.HORIZONTAL,
             false
         )
-        favoriteMoviesAdapter = MovieListAdapter(listOf())
+        recentMovies.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
+        favoriteMoviesAdapter = MovieListAdapter(arrayListOf()) { movie -> showMovieDetails(movie) }
+        recentMoviesAdapter = MovieListAdapter(arrayListOf()) { movie -> showMovieDetails(movie) }
         favoriteMovies.adapter = favoriteMoviesAdapter
+        recentMovies.adapter = recentMoviesAdapter
         favoriteMoviesAdapter.updateMovies(favoriteMoviesList)
+        recentMoviesAdapter.updateMovies(recentMoviesList)
+
+        if(intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain")
+            handleSendText(intent)
+
+    }
+
+    private fun handleSendText(intent: Intent) {
+        intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+            searchText.setText(it)
+        }
+    }
+    private fun showMovieDetails(movie: Movie) {
+        val intent = Intent(this, MovieDetailActivity::class.java).apply {
+            putExtra("movie_title", movie.title)
+        }
+        startActivity(intent)
     }
 }
