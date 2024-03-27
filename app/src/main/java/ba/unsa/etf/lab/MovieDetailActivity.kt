@@ -69,7 +69,6 @@ class MovieDetailActivity : AppCompatActivity() {
         try {
             startActivity(webIntent)
         } catch (e: ActivityNotFoundException) {
-            // Definisati naredbe ako ne postoji aplikacija za navedenu akciju
         }
 
     }

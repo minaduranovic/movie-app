@@ -23,7 +23,6 @@ class MovieListAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = movies[position].title;
         val genreMatch: String = movies[position].genre
-        //Pronalazimo id drawable elementa na osnovu naziva zanra
         val context: Context = holder.movieImage.context
         var id: Int = context.resources
             .getIdentifier(genreMatch, "drawable", context.packageName)

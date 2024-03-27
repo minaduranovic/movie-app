@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="128dp"
     android:layout_height="172dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="4dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +18,7 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/picture1"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
         <TextView
             android:id="@+id/movieTitle"
             android:layout_width="match_parent"
