@@ -1,7 +1,9 @@
 package ba.unsa.etf.lab
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +23,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var favoriteMovies: RecyclerView
-    private lateinit var searchText: TextView
     private lateinit var favoriteMoviesAdapter: MovieListAdapter
     private var favoriteMoviesList =  getFavoriteMovies()
     private lateinit var recentMovies: RecyclerView
     private lateinit var recentMoviesAdapter: MovieListAdapter
     private var recentMoviesList =  getRecentMovies()
+    private lateinit var searchText: EditText
+    private val br: BroadcastReceiver = ConnectivityBroadcastReciever()
+    private val filter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,5 +72,14 @@ class MainActivity : AppCompatActivity() {
             putExtra("movie_title", movie.title)
         }
         startActivity(intent)
+    }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(br, filter)
+    }
+
+    override fun onPause() {
+        unregisterReceiver(br)
+        super.onPause()
     }
 }
