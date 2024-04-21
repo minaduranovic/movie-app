@@ -1,14 +1,18 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="128dp"
-    android:layout_height="172dp"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="4dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="5dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp"
+    >
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="156dp"
         android:orientation="vertical">
 
         <ImageView
@@ -16,15 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/picture1"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            android:transitionName="poster"
+            app:srcCompat="@drawable/picture1" />
 
         <TextView
             android:id="@+id/movieTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="title"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
+            android:textAlignment="center"
             android:textSize="14sp" />
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

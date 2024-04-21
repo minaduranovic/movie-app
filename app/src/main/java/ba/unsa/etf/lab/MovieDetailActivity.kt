@@ -1,5 +1,6 @@
 package ba.unsa.etf.lab
 
+
 import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -10,6 +11,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -48,6 +52,10 @@ class MovieDetailActivity : AppCompatActivity() {
         shareButton.setOnClickListener{
             shareOverview()
         }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment1) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigation1)
+        navView.setupWithNavController(navController)
     }
     private fun populateDetails() {
         title.text=movie.title
