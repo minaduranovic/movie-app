@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">lab</string>
-    <string name="recent">Recent movies</string>
-    <string name="favorite">Favorite movies</string>
+    <string name="app_name" translatable="false">Cinaeste</string>
     <string name="search">Search</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="favorite">Favorites</string>
+    <string name="recent">Upcoming movies</string>
+    <string name="favoritesText">My favorite movies</string>
+    <string name="recentTexts">Latest movies  playing in theaters and streaming platforms</string>
 </resources>
