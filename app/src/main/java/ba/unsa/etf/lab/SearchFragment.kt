@@ -1,5 +1,6 @@
 package ba.unsa.etf.lab
 
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,7 +28,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        var view = inflater.inflate(R.layout.fragment_search, container, false)
         searchText = view.findViewById(R.id.searchText)
         arguments?.getString("search")?.let {
             searchText.setText(it)
@@ -42,7 +43,6 @@ class SearchFragment : Fragment() {
         }
         return view;
     }
-
 
     private fun onClick() {
         val toast = Toast.makeText(context, "Search start", Toast.LENGTH_SHORT)
@@ -67,7 +67,7 @@ class SearchFragment : Fragment() {
             val result = MovieRepository.searchRequest(query)
             // Prikaze se rezultat korisniku na glavnoj niti
             when (result) {
-                is Result.Success<List<Movie>> -> searchDone(result.data)
+                is GetMoviesResponse -> searchDone(result.movies)
                 else-> onError()
             }
         }
@@ -78,5 +78,4 @@ class SearchFragment : Fragment() {
         }
         startActivity(intent)
     }
-
 }

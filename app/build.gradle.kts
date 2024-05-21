@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "ba.unsa.etf.lab"
     compileSdk = 34
-
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         applicationId = "ba.unsa.etf.lab"
         minSdk = 24
@@ -18,12 +20,25 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField(
+                "String",
+                "TMDB_API_KEY",
+                project.properties["TMDB_API_KEY"].toString()
+            )
+        }
         release {
+            buildConfigField(
+                "String",
+                "TMDB_API_KEY",
+                project.properties["TMDB_API_KEY"].toString()
+            )
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
     }
     compileOptions {
@@ -33,9 +48,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-dependencies {
-    implementation("com.google.android.material:material:+")
 }
 
 dependencies {
@@ -61,4 +73,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1-Beta")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
 }
+

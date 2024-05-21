@@ -16,8 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private val br: BroadcastReceiver = ConnectivityBroadcastReceiver()
-
-
     private val filter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +32,10 @@ class MainActivity : AppCompatActivity() {
                 navView.selectedItemId= R.id.searchFragment
                 navController.navigate(R.id.searchFragment,bundle)
             }
+        }
+        Intent(this, LatestMovieService::class.java).also {
+            startForegroundService(it)
+            return
         }
     }
     override fun onResume() {

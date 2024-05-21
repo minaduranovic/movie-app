@@ -1,10 +1,12 @@
 package ba.unsa.etf.lab
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,52 +18,50 @@ import kotlinx.coroutines.launch
 
 class SimilarFragment() : Fragment() {
 
-    private lateinit var similarRV: RecyclerView
-    private var movieList = listOf<String>()
-    private lateinit var similarRVSimpleAdapter: SimpleStringAdapter
+    private lateinit var similarRV:RecyclerView
+    private var movieList= listOf<Movie>()
+    private lateinit var similarRVSimpleAdapter:SimpleSimilarStringAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view: View = inflater.inflate(R.layout.fragment_similar, container, false)
+        var view:View = inflater.inflate(R.layout.fragment_similar, container, false)
         val intent = requireActivity().intent
         val extras = intent.extras
 
         if (extras != null) {
-            if (extras.containsKey("movie_title")) {
-                movieList =
-                    getSimilarMovies()?.get(extras.getString("movie_title")) ?: emptyList()
-
-            } else if (extras.containsKey("movie_id")) {
+            if (extras.containsKey("movie_id")){
                 getSimilarMoviesById(extras.getLong("movie_id"))
             }
         }
 
         similarRV = view.findViewById<RecyclerView>(R.id.listSimilar)
         similarRV.layoutManager = LinearLayoutManager(activity)
-        similarRVSimpleAdapter = SimpleStringAdapter(movieList)
+        similarRVSimpleAdapter = SimpleSimilarStringAdapter(movieList)
         similarRV.adapter = similarRVSimpleAdapter
         return view
     }
-
-    fun getSimilarMoviesById(query: Long) {
+    fun getSimilarMoviesById(query: Long){
 
         val scope = CoroutineScope(Job() + Dispatchers.Main)
-        scope.launch {
-            val result = MovieRepository.getSimilarMoviesAPI(query)
+        scope.launch{
+            val result = MovieRepository.getSimilarMovies(query)
             when (result) {
-                is Result.Success<MutableList<String>> -> similarRetrieved(result.data)
-                else -> Log.v("meh", "meh")
+                is GetSimilarResponse -> onSuccess(result.movies)
+                else-> onError()
             }
         }
     }
-
-    fun similarRetrieved(similar: MutableList<String>) {
-        movieList = similar
-        similarRVSimpleAdapter.list = similar;
+    fun onSuccess(movies: List<Movie>){
+        movieList=movies
+        similarRVSimpleAdapter.list = movies;
         similarRVSimpleAdapter.notifyDataSetChanged();
     }
-}
+    fun onError() {
+        val toast = Toast.makeText(context, "Search error", Toast.LENGTH_SHORT)
+        toast.show()
+    }
 
+}
