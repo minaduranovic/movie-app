@@ -1,17 +1,18 @@
 package ba.unsa.etf.lab
-
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-
+import androidx.room.*
+@Entity
 data class Movie (
-    @SerializedName("id") var id: Long,
-    @SerializedName("original_title")  var title: String,
-    @SerializedName("overview")  var overview: String,
-    @SerializedName("release_date")   var releaseDate: String,
-    @SerializedName("homepage")   var homepage: String?,
-    @SerializedName("poster_path") var posterPath: String?,
-    @SerializedName("backdrop_path")  var backdropPath: String?
+    @PrimaryKey @SerializedName("id") var id: Long,
+    @ColumnInfo(name = "title") @SerializedName("original_title")  var title: String,
+    @ColumnInfo(name = "overview") @SerializedName("overview")  var overview: String,
+    @ColumnInfo(name = "release_date") @SerializedName("release_date")   var releaseDate: String,
+    @ColumnInfo(name = "homepage") @SerializedName("homepage")   var homepage: String?,
+    @ColumnInfo(name = "poster_path") @SerializedName("poster_path") var posterPath: String?,
+    @ColumnInfo(name = "backdrop_path") @SerializedName("backdrop_path")  var backdropPath: String?,
+    @ColumnInfo(name = "favourite") var favourite: Long = 0
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
