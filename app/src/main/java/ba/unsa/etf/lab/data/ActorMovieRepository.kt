@@ -1,14 +1,8 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.data
 
+import ba.unsa.etf.lab.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 
 object ActorMovieRepository {
 

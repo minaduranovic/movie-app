@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ba.unsa.etf.lab.MovieDetailActivity
+import ba.unsa.etf.lab.R
+import ba.unsa.etf.lab.adapters.MovieListAdapter
+import ba.unsa.etf.lab.data.Movie
+import ba.unsa.etf.lab.data.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

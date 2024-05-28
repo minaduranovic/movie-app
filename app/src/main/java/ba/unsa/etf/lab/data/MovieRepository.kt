@@ -1,18 +1,12 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.data
 
 import android.content.Context
+import ba.unsa.etf.lab.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 
 
 sealed class Result<out R> {
@@ -22,7 +16,7 @@ sealed class Result<out R> {
 
 object MovieRepository {
 
-    private const val tmdb_api_key : String =  BuildConfig.TMDB_API_KEY
+    private const val tmdb_api_key : String = BuildConfig.TMDB_API_KEY
 
     suspend fun searchRequest(
         query: String
@@ -118,7 +112,7 @@ object MovieRepository {
             }
         }
     }
-    suspend fun writeFavorite(context: Context,movie:Movie) : String?{
+    suspend fun writeFavorite(context: Context,movie: Movie) : String?{
         return withContext(Dispatchers.IO) {
             try{
                 var db = AppDatabase.getInstance(context)
@@ -132,7 +126,7 @@ object MovieRepository {
                         db!!.castDao().insertAll(castX)
                     }
                 }
-                val similarResponse = MovieRepository.getSimilarMovies(movie.id)
+                val similarResponse = getSimilarMovies(movie.id)
                 val simiar = similarResponse?.movies
                 if(simiar != null){
                     for(sm in simiar){

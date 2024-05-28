@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.data
 
 
 fun getFavoriteMovies(): List<Movie> {

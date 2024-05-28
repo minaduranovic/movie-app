@@ -1,18 +1,16 @@
 package ba.unsa.etf.lab
 
-
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import ba.unsa.etf.lab.data.Movie
+
 
 class MovieDetailResultActivity : AppCompatActivity() {
 
@@ -31,9 +29,11 @@ class MovieDetailResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail_result)
+
         title = findViewById(R.id.movie_title)
         overview = findViewById(R.id.movie_overview)
         releaseDate = findViewById(R.id.movie_release_date)
+        genre = findViewById(R.id.movie_genre)
         poster = findViewById(R.id.movie_poster)
         website = findViewById(R.id.movie_website)
         backdrop = findViewById(R.id.movie_backdrop)
@@ -52,6 +52,7 @@ class MovieDetailResultActivity : AppCompatActivity() {
         }
 
     }
+
 
     private fun populateDetails() {
         title.text=movie.title

@@ -1,8 +1,7 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.views
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ba.unsa.etf.lab.R
+import ba.unsa.etf.lab.adapters.SimpleSimilarStringAdapter
+import ba.unsa.etf.lab.data.GetSimilarResponse
+import ba.unsa.etf.lab.data.Movie
+import ba.unsa.etf.lab.data.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,7 +24,7 @@ class SimilarFragment() : Fragment() {
 
     private lateinit var similarRV:RecyclerView
     private var movieList= listOf<Movie>()
-    private lateinit var similarRVSimpleAdapter:SimpleSimilarStringAdapter
+    private lateinit var similarRVSimpleAdapter: SimpleSimilarStringAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,10 +1,7 @@
 package ba.unsa.etf.lab
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.Manifest
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +12,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import ba.unsa.etf.lab.data.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -29,8 +27,8 @@ import java.net.URL
 class LatestMovieService : Service() {
     private var wakeLock: PowerManager.WakeLock? = null
     private var isServiceStarted = false
-    private val tmdb_api_key: String = BuildConfig.TMDB_API_KEY
-    private var movie = Movie(1, "test", "test", "test", " ", "test", "test")
+    private val tmdb_api_key : String = BuildConfig.TMDB_API_KEY
+    private var movie = Movie(1,"test","test","test","test","test","test")
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -78,7 +76,7 @@ class LatestMovieService : Service() {
             (url.openConnection() as? HttpURLConnection)?.run {
                 val result = this.inputStream.bufferedReader().use { it.readText() }
                 val jsonObject = JSONObject(result)
-                movie.title = jsonObject.getString("original_title")
+                movie.title = jsonObject.getString("title")
                 movie.id = jsonObject.getLong("id")
                 movie.releaseDate = jsonObject.getString("release_date")
                 movie.homepage = jsonObject.getString("homepage")
@@ -90,24 +88,23 @@ class LatestMovieService : Service() {
             }
             val notifyIntent = Intent(this, MovieDetailResultActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                putExtra("movie", movie)
+                putExtra("movie",movie)
             }
             val notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
             )
-            val notification =
-                NotificationCompat.Builder(baseContext, "LATEST MOVIE SERVICE CHANNEL").apply {
-                    setSmallIcon(android.R.drawable.stat_notify_sync)
-                    setContentTitle("New movie found")
-                    setContentText(movie.title)
-                    setContentIntent(notifyPendingIntent)
-                    setOngoing(false)
-                    build()
-                }
+            val notification = NotificationCompat.Builder(baseContext, "LATEST MOVIE SERVICE CHANNEL").apply{
+                setSmallIcon(android.R.drawable.stat_notify_sync)
+                setContentTitle("New movie found")
+                setContentText(movie.title)
+                setContentIntent(notifyPendingIntent)
+                setOngoing(false)
+                build()
+            }
             with(NotificationManagerCompat.from(applicationContext)) {
                 if (ActivityCompat.checkSelfPermission(
                         baseContext,
-                        android.Manifest.permission.POST_NOTIFICATIONS
+                        Manifest.permission.POST_NOTIFICATIONS
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     return
@@ -126,8 +123,7 @@ class LatestMovieService : Service() {
     private fun createNotification(): Notification {
         val notificationChannelId = "LATEST MOVIE SERVICE CHANNEL"
 
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channel = NotificationChannel(
             notificationChannelId,
             "Latest Movie notifications channel",
@@ -143,7 +139,7 @@ class LatestMovieService : Service() {
         notificationManager.createNotificationChannel(channel)
 
 
-        val builder: Notification.Builder = Notification.Builder(
+        val builder: Notification.Builder =  Notification.Builder(
             this,
             notificationChannelId
         )

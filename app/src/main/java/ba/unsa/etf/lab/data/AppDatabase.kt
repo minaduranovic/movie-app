@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.data
 
 import android.content.Context
 import androidx.room.Database
@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = arrayOf(Movie::class,Cast::class,SimilarMovies::class), version = 1)
+@Database(entities = arrayOf(Movie::class, Cast::class, SimilarMovies::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun castDao(): CastDao

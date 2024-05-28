@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.data
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

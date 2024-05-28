@@ -1,5 +1,7 @@
 package ba.unsa.etf.lab
 
+import ba.unsa.etf.lab.data.Movie
+import ba.unsa.etf.lab.data.getFavoriteMovies
 import junit.framework.TestCase.assertEquals
 import org.hamcrest.CoreMatchers.hasItem
 import org.hamcrest.CoreMatchers.`is`

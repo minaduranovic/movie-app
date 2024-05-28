@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.adapters
 
 
 import android.content.Context
@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ba.unsa.etf.lab.data.Movie
+import ba.unsa.etf.lab.R
 import com.bumptech.glide.Glide
 
 class MovieListAdapter(
     private var movies: List<Movie>,
-    private val onItemClicked: (movie:Movie) -> Unit
+    private val onItemClicked: (movie: Movie) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     private val posterPath = "https://image.tmdb.org/t/p/w342"

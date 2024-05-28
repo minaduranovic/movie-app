@@ -1,5 +1,6 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.data
 
+import ba.unsa.etf.lab.BuildConfig
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET

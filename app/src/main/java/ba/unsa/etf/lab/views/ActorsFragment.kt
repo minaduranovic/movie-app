@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.views
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ba.unsa.etf.lab.R
+import ba.unsa.etf.lab.adapters.SimpleCastStringAdapter
+import ba.unsa.etf.lab.data.ActorMovieRepository
+import ba.unsa.etf.lab.data.Cast
+import ba.unsa.etf.lab.data.GetCastResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

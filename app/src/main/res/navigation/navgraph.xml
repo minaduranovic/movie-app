@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/favoriteMoviesFragment"
-        android:name="ba.unsa.etf.lab.FavoriteMoviesFragment"
+        android:name="ba.unsa.etf.lab.views.FavoriteMoviesFragment"
         android:label="FavoriteMoviesFragment" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="ba.unsa.etf.lab.SearchFragment"
+        android:name="ba.unsa.etf.lab.views.SearchFragment"
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/recentMoviesFragment"
-        android:name="ba.unsa.etf.lab.RecentMoviesFragment"
+        android:name="ba.unsa.etf.lab.views.RecentMoviesFragment"
         android:label="RecentMoviesFragment" />
 </navigation>

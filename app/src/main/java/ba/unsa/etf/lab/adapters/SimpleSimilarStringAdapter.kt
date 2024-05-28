@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.adapters
 
 
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ba.unsa.etf.lab.data.Movie
 
 class SimpleSimilarStringAdapter(list: List<Movie>) : RecyclerView.Adapter<SimpleSimilarStringAdapter.SimpleViewHolder>() {
 

@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/actorsFragment"
-        android:name="ba.unsa.etf.lab.ActorsFragment"
+        android:name="ba.unsa.etf.lab.views.ActorsFragment"
         android:label="fragment_actors"
         tools:layout="@layout/fragment_actors" >
     </fragment>
     <fragment
         android:id="@+id/similarFragment"
-        android:name="ba.unsa.etf.lab.SimilarFragment"
+        android:name="ba.unsa.etf.lab.views.SimilarFragment"
         android:label="fragment_similar"
         tools:layout="@layout/fragment_similar" >
     </fragment>

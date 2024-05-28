@@ -1,4 +1,4 @@
-package ba.unsa.etf.lab
+package ba.unsa.etf.lab.adapters
 
 import android.view.LayoutInflater
 import android.view.View
